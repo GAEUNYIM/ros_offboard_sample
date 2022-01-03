@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>ros_offboard_sample</name>
+  <version>0.0.0</version>
+  <description>The ros_offboard_sample package sets the specific position of drone</description>
+
+  <maintainer email="rkdms4031@unist.ac.kr">root</maintainer>
+
+
+  <license>TODO</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <buildtool_depend>catkin_simple</buildtool_depend>
+
+  <export>
+  </export>
+  
+  <depend>roscpp</depend>
+  <depend>geometry_msgs</depend>
+  <depend>mavros_msgs</depend>
+</package>
