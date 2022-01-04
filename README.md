@@ -37,3 +37,6 @@ https://user-images.githubusercontent.com/59522019/148004927-353244bd-b541-4727-
 
 ## Further TODO?
 As like the simple ros_offboard_sample package, you can create a new package that works with your own algorithm through gazebo simulator.
+
+## Referneces
+https://docs.px4.io/master/en/ros/mavros_offboard.html
