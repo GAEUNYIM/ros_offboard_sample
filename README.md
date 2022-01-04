@@ -1,5 +1,5 @@
 # ros_offboard_sample
-The'ros_offboard_sample' package works for simple offboarding c++ code.
+The 'ros_offboard_sample' package works for simple offboarding c++ code.
 Your drone in gazebo simulation will be set to the certain point, (0, 0, 2).
 
 ## Prerequisites
