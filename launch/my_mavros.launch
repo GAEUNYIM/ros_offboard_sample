@@ -25,7 +25,6 @@
 </node>
 
 <node name="offb_node" pkg="ros_offboard_sample" type="sample" output="screen">
-
 </node>
 
 </launch>

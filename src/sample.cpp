@@ -34,9 +34,12 @@ int main(int argc, char **argv)
     }
 
     geometry_msgs::PoseStamped pose;
-    pose.pose.position.x = 0;
+    // Set a customized position & orientation of my drone
+    // The drone is watching the panorama of the warehouse.world
+    pose.pose.position.x = 5;
     pose.pose.position.y = 0;
     pose.pose.position.z = 2;
+    pose.pose.orientation.z = 3.14;
 
     //send a few setpoints before starting
     for(int i = 100; ros::ok() && i > 0; --i){
@@ -71,7 +74,6 @@ int main(int argc, char **argv)
                 last_request = ros::Time::now();
             }
         }
-
         local_pos_pub.publish(pose);
 
         ros::spinOnce();
