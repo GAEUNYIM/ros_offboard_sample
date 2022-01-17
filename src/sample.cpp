@@ -25,6 +25,9 @@ int main(int argc, char **argv)
 
     //the setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(20.0);
+    
+    // we will take three camera shots 
+    int shots = 3;
 
     // wait for FCU connection
     while(ros::ok() && !current_state.connected){
@@ -73,7 +76,20 @@ int main(int argc, char **argv)
                 }
                 last_request = ros::Time::now();
             }
-        }
+        } 
+        
+        // After Offboarding && Arming
+        //if( current_state.mode == "OFFBOARD" && current_state.armed && 
+        	//(ros::Time::now() - last_request > ros::Duration(5.0))){
+        	//if( shots > 0) {
+            	//// Take shots
+		        //printf("SHOTS!! We have %d shots left", shots);
+		        //pose.pose.position.x += 1;
+		        //shots--;
+            //}
+            //last_request = ros::Time::now();
+        //}
+        
         local_pos_pub.publish(pose);
 
         ros::spinOnce();
