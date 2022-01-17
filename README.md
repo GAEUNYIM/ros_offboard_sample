@@ -33,7 +33,12 @@ To open multiple Dokcer terminal, you can use this commands to bash the docker h
 You need to prepare the first drone setup by arming and changing option to off-board through the QGC GUI.
 
 ## Captures
+Video_ver.1.0
 https://user-images.githubusercontent.com/59522019/148004927-353244bd-b541-4727-8563-5a222355faed.mp4
+Video_ver.2.0
+https://user-images.githubusercontent.com/59522019/149767535-f14935c3-fff0-4c8e-acbb-8508a884b36d.mp4
+
+
 
 ## Further TODO?
 As like the simple ros_offboard_sample package, you can create a new package that works with your own algorithm through gazebo simulator.
