@@ -25,9 +25,9 @@ int main(int argc, char **argv)
 
     //the setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(20.0);
-    
-    // we will take three camera shots 
-    int shots = 3;
+
+	// How many shots wil be taken?
+	int shots = 1;
 
     // wait for FCU connection
     while(ros::ok() && !current_state.connected){
@@ -39,7 +39,7 @@ int main(int argc, char **argv)
     geometry_msgs::PoseStamped pose;
     // Set a customized position & orientation of my drone
     // The drone is watching the panorama of the warehouse.world
-    pose.pose.position.x = 5;
+    pose.pose.position.x = 4;
     pose.pose.position.y = 0;
     pose.pose.position.z = 2;
     pose.pose.orientation.z = 3.14;
@@ -75,20 +75,14 @@ int main(int argc, char **argv)
                     ROS_INFO("Vehicle armed");
                 }
                 last_request = ros::Time::now();
-            }
-        } 
-        
-        // After Offboarding && Arming
-        //if( current_state.mode == "OFFBOARD" && current_state.armed && 
-        	//(ros::Time::now() - last_request > ros::Duration(5.0))){
-        	//if( shots > 0) {
-            	//// Take shots
-		        //printf("SHOTS!! We have %d shots left", shots);
-		        //pose.pose.position.x += 1;
-		        //shots--;
+            } //else {
+            	//if( ros::Time::now() - last_request > ros::Duration(5.0)){
+            		//printf("shots!! %d", shots++);
+            		//pose.pose.position.x += 1;
+            	//}
+            	//last_request = ros::Time::now();
             //}
-            //last_request = ros::Time::now();
-        //}
+        } 
         
         local_pos_pub.publish(pose);
 
