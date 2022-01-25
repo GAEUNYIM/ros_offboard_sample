@@ -77,7 +77,7 @@ int main(int argc, char **argv)
                 last_request = ros::Time::now();
             } //else {
             	//if( ros::Time::now() - last_request > ros::Duration(5.0)){
-            		//printf("shots!! %d", shots++);
+            		//ROS_INFO("shots!! %d", shots++);
             		//pose.pose.position.x += 1;
             	//}
             	//last_request = ros::Time::now();
