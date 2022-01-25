@@ -60,30 +60,25 @@ int main(int argc, char **argv)
     ros::Time last_request = ros::Time::now();
 
     while(ros::ok()){
-        if( current_state.mode != "OFFBOARD" &&
-            (ros::Time::now() - last_request > ros::Duration(5.0))){
-            if( set_mode_client.call(offb_set_mode) &&
-                offb_set_mode.response.mode_sent){
-                ROS_INFO("Offboard enabled");
-            }
-            last_request = ros::Time::now();
-        } else {
-            if( !current_state.armed &&
-                (ros::Time::now() - last_request > ros::Duration(5.0))){
-                if( arming_client.call(arm_cmd) &&
-                    arm_cmd.response.success){
+        if (ros::Time::now() - last_request > ros::Duration(5.0))
+        {
+        	if(current_state.mode != "OFFBOARD") {
+        		if(set_mode_client.call(offb_set_mode) 
+        				&& offb_set_mode.response.mode_sent){
+                	ROS_INFO("Offboard enabled");
+            	}	
+        	} else if (!current_state.armed ) {
+        		if( arming_client.call(arm_cmd) &&
+                    	arm_cmd.response.success){
                     ROS_INFO("Vehicle armed");
                 }
-                last_request = ros::Time::now();
-            } //else {
-            	//if( ros::Time::now() - last_request > ros::Duration(5.0)){
-            		//ROS_INFO("shots!! %d", shots++);
-            		//pose.pose.position.x += 1;
-            	//}
-            	//last_request = ros::Time::now();
-            //}
-        } 
-        
+        	} else {
+        		ROS_INFO("shots!! %d", shots++);
+            	pose.pose.position.x += 1;
+        	}
+        	last_request = ros::Time::now();
+        }
+
         local_pos_pub.publish(pose);
 
         ros::spinOnce();
