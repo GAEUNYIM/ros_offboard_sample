@@ -3,6 +3,7 @@
 #include <mavros_msgs/CommandBool.h>
 #include <mavros_msgs/SetMode.h>
 #include <mavros_msgs/State.h>
+#include <std_msgs/Empty.h>
 
 mavros_msgs::State current_state;
 void state_cb(const mavros_msgs::State::ConstPtr& msg){
@@ -22,12 +23,11 @@ int main(int argc, char **argv)
             ("mavros/cmd/arming");
     ros::ServiceClient set_mode_client = nh.serviceClient<mavros_msgs::SetMode>
             ("mavros/set_mode");
+    ros::Publisher reach_signal_pub = nh.advertise<std_msgs::Empty>
+    		("reached_signal", 1);
 
     //the setpoint publishing rate MUST be faster than 2Hz
     ros::Rate rate(20.0);
-
-	// How many shots wil be taken?
-	int shots = 1;
 
     // wait for FCU connection
     while(ros::ok() && !current_state.connected){
@@ -36,13 +36,22 @@ int main(int argc, char **argv)
         rate.sleep();
     }
 
+    int FORWARD_HEIGHT = 2;
+	
     geometry_msgs::PoseStamped pose;
     // Set a customized position & orientation of my drone
     // The drone is watching the panorama of the warehouse.world
     pose.pose.position.x = 4;
     pose.pose.position.y = 0;
-    pose.pose.position.z = 2;
+    pose.pose.position.z = FORWARD_HEIGHT;
     pose.pose.orientation.z = 3.14;
+
+	// How many shots wil be taken?
+	int shots = 1;
+	
+	// OFFBOARD & ARMING is done
+	bool takeoff_done = false;
+	bool filming_done = false;
 
     //send a few setpoints before starting
     for(int i = 100; ros::ok() && i > 0; --i){
@@ -56,6 +65,8 @@ int main(int argc, char **argv)
 
     mavros_msgs::CommandBool arm_cmd;
     arm_cmd.request.value = true;
+    
+    
 
     ros::Time last_request = ros::Time::now();
 
@@ -73,8 +84,14 @@ int main(int argc, char **argv)
                     ROS_INFO("Vehicle armed");
                 }
         	} else {
-        		ROS_INFO("shots!! %d", shots++);
-            	pose.pose.position.x += 1;
+        		if (shots <= 5){
+        			ROS_INFO("shots!! %d", shots++);
+            		pose.pose.position.x += 1;
+            		
+            		std_msgs::Empty m;
+            		reach_signal_pub.publish(m);
+            		
+        		}
         	}
         	last_request = ros::Time::now();
         }
@@ -87,4 +104,3 @@ int main(int argc, char **argv)
 
     return 0;
 }
-
