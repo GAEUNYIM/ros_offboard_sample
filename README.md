@@ -1,6 +1,11 @@
 # ros_offboard_sample
-The 'ros_offboard_sample' package works for simple offboarding c++ code.
+The 'ros_offboard_sample' package firstly made for simple offboarding c++ code. And now it is currently being updated with new functions which can shot pictures through automated control system.
+#### ver1.0.0
 Your drone in gazebo simulation will be set to the certain point, (0, 0, 2).
+#### ver1.0.1
+Now your new drone has a fpv camera. 
+#### ver1.0.2
+It takes 5 pictures through the attatched cam by increasing 1 units on x-axis from the initial position (4, 0, 2).
 
 ## Prerequisites
 All requirements should be installed inside Docker.
@@ -33,15 +38,15 @@ To open multiple Dokcer terminal, you can use this commands to bash the docker h
 You need to prepare the first drone setup by arming and changing option to off-board through the QGC GUI.
 
 ## Captures
-Video_ver.1.0
+Video_ver1.0.0
 https://user-images.githubusercontent.com/59522019/148004927-353244bd-b541-4727-8563-5a222355faed.mp4
 
-Video_ver.2.0
+Video_ver1.0.1
 https://user-images.githubusercontent.com/59522019/149767535-f14935c3-fff0-4c8e-acbb-8508a884b36d.mp4
 
 
 ## Further TODO?
-As like the simple ros_offboard_sample package, you can create a new package that works with your own algorithm through gazebo simulator.
+Handling the captured images by the ros_cv_pkg.
 
 ## Refereneces
 https://docs.px4.io/master/en/ros/mavros_offboard.html
